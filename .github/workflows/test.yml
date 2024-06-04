@@ -10,6 +10,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: development-key-${{hashFiles('**/package-lock.json')}}
       - name: Get Dependencies
         run: npm ci
       - name: Run Tests
@@ -24,6 +29,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: development-key-${{hashFiles('**/package-lock.json')}}
       - name: Install dependencies
         run: npm ci
       - name: Build
