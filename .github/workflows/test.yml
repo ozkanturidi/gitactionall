@@ -19,6 +19,8 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      buildoutput: ${{ steps.build-step.outputs.buildoutput }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -26,6 +28,9 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: build job output
+        id: build-step
+        run: echo "buildoutput=success" >> "$GITHUB_OUTPUT"
       - name: Upload articats
         uses: actions/upload-artifact@v3
         with:
@@ -41,8 +46,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist-files
-
       - name: Output files
         run: ls
+      - name: Build output
+        run: echo ${{needs.build.outputs.buildoutput}}
       - name: Output message
         run: echo "Deployment succeeded!"
