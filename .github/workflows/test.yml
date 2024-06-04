@@ -4,5 +4,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Print hello
-        run: echo "Hello"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Get Dependencies
+        run: npm ci
+      - name: Run Tests
+        run: npm test
+      - name: Print success message
+        run: echo "Tests passed!"
