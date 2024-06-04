@@ -30,6 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dist-files
+          path: dist
       - name: Print success message
         run: echo "Build succeeded!"
   deploy:
