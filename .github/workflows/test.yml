@@ -1,8 +1,9 @@
 name: Test Practice
 on:
-  push:
-    branches:
-      - main
+  issues:
+    types:
+      - opened
+
 jobs:
   test:
     runs-on: ubuntu-latest
